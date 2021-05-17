@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#define test_init() int test_failures, test_successes = 0
+#define test_init() int test_failures = 0, test_successes = 0
 
 #define run_test_case(function) \
     do { \
@@ -18,7 +18,12 @@
 #define test_assert(expr) \
     do { \
         if (!(expr)) { \
-            printf("Assertion failed: " #expr "\n"); \
+            printf( \
+                "\x1b[31mAssertion failed:\x1b[0m %s:%d " \
+                "`test_assert(\x1b[36m" #expr "\x1b[0m);`\n", \
+                __FILE__, \
+                __LINE__ \
+            ); \
             return 1; \
         } \
     } while (0)
@@ -29,6 +34,5 @@
         test_successes, \
         test_failures \
     ) && test_failures \
-
 
 #endif

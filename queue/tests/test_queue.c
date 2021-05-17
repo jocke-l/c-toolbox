@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-#include "test.h"
+#include <test.h>
+
 #include "../queue.h"
 
 int test_dynamic_queue_capacity() {
